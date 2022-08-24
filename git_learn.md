@@ -66,3 +66,25 @@ commit_id可以通过查看历史git命令来寻找git reflog
 - 创建+切换分支：`git checkout -b <name>`或者`git switch -c <name>`
 - 合并某分支到当前分支：先切换到主分支，再 `git merge <name>`。在其他分支add以及`commit`以后，相当于在那条分支上生成了新的`commit`节点，在和主分支合并以前，此时若切换回主分支，会发现之前在其他分支上提交的修改消失了，此时我们再切换回其他分支，工作区的修改又恢复了，这就是`git`的奇妙之处。若其他分支`commit`过了，在主分支上我们对同一文件做出了修改，会提示`merge`失败，因为`git`不知道该如何合并，我们可以`git checkout -- <filename>` 来放弃在master分支对这个文件的修改，或者使用`git stage`存起来。
 - 删除分支：`git branch -d <name>`
+
+BUG分支：
+
+- 存储工作现场：`git stash`
+
+- 查看存储的工作现场：`git stash list`
+
+- 恢复工作现场：一是用`git stash apply`恢复，但是恢复后，stash内容并不删除，你需要用`git stash drop`来删除；
+
+  另一种方式是用`git stash pop`，恢复的同时把stash内容也删了
+
+- 指定恢复某个工作现场：你可以多次stash，恢复的时候，先用`git stash list`查看，然后恢复指定的stash，用命令`git stash apply stash@{0}`
+
+- 复制一个特定的提交到当前分支: `git cherry-pick <commit>` 
+
+多人协作：
+
+- 在本地创建和远程分支对应的分支，使用`git checkout -b branch-name origin/branch-name`，本地和远程分支的名称最好一致；
+- 查看远程库信息，使用`git remote -v`
+- 从本地推送分支，使用`git push origin branch-name`，如果推送失败，先用`git pull`抓取远程的新提交
+- 建立本地分支和远程分支的关联，使用`git branch --set-upstream branch-name origin/branch-name`
+- 从远程抓取分支，使用`git pull`，如果有冲突，要先处理冲突。
