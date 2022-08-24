@@ -54,6 +54,8 @@ commit_id可以通过查看历史git命令来寻找git reflog
 
 **删除远程库:** `git remote -v`查看远程库信息；git remote rm origin 此处的“删除”其实是解除了本地和远程的绑定关系，并不是物理上删除了远程库。远程库本身并没有任何改动。
 
+**同步远程仓库**：先 `git add` 再`commit`之后 ；`git remote add upstream xxxx.git` ，再 `git fetch upstream`，若上游仓库有变更，需要先进行`rebase`: `git rebase upstream/master`, `rebase`是指将当前分支的基分支修改到`upstream/master`(因为基分支可能已经有了改动), 并将当前分支在原始基分支上的改动重新commit到新基分支上。![在这里插入图片描述](https://img-blog.csdnimg.cn/12b959efcc454da5a15b9fdec493d61b.png?)
+
 ## 分支管理
 
 创建与合并分支：分支的创建与合并实际上是指针的创建与移动。
@@ -64,3 +66,5 @@ commit_id可以通过查看历史git命令来寻找git reflog
 - 创建+切换分支：`git checkout -b <name>`或者`git switch -c <name>`
 - 合并某分支到当前分支：先切换到主分支，再 `git merge <name>`
 - 删除分支：`git branch -d <name>`
+
+啊实打实打算
