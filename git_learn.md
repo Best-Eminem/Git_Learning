@@ -64,7 +64,5 @@ commit_id可以通过查看历史git命令来寻找git reflog
 - 创建分支：`git branch <name>`
 - 切换分支：`git checkout <name>`或者`git switch <name>`
 - 创建+切换分支：`git checkout -b <name>`或者`git switch -c <name>`
-- 合并某分支到当前分支：先切换到主分支，再 `git merge <name>`
+- 合并某分支到当前分支：先切换到主分支，再 `git merge <name>`。在其他分支add以及`commit`以后，相当于在那条分支上生成了新的`commit`节点，在和主分支合并以前，此时若切换回主分支，会发现之前在其他分支上提交的修改消失了，此时我们再切换回其他分支，工作区的修改又恢复了，这就是`git`的奇妙之处。若其他分支`commit`过了，在主分支上我们对同一文件做出了修改，会提示`merge`失败，因为`git`不知道该如何合并，我们可以`git checkout -- <filename>` 来放弃在master分支对这个文件的修改，或者使用`git stage`存起来。
 - 删除分支：`git branch -d <name>`
-
-啊实打实打算
